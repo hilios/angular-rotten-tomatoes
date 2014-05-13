@@ -1,0 +1,12 @@
+{
+  "name": "angular-rotten-tomatoes",
+  "private": true,
+  "version": "0.0.1",
+  "devDependencies": {
+    "karma": "~0.12",
+    "karma-chai-plugins": "~0.1",
+    "karma-coverage": "~0.1",
+    "karma-mocha": "~0.1",
+    "karma-phantomjs-launcher": "~0.1"
+  }
+}

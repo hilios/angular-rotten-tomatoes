@@ -1,0 +1,37 @@
+{
+  "name": "angular-rotten-tomatoes",
+  "version": "0.0.1",
+  "title": "Rotten Tomatoes API to AngularJS.",
+  "description": "Wraps the Rotten Tomatoes API into AngularJS services.",
+  "keywords": [
+    "angular",
+    "movies",
+    "dvds",
+    "Rotten Tomatoes",
+    "IMDb"
+  ],
+  "author": "Edson Hilios",
+  "homepage": "http://hilios.github.io/angular-rotten-tomatoes/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hilios/angular-rotten-tomatoes/issues"
+  },
+  "main": [
+    "./angular-rotten-tomatoes.js",
+    "./angular-rotten-tomatoes.min.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "src",
+    "test",
+    "package.json",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.2"
+  },
+  "dependencies": {
+    "angular": "~1.2"
+  }
+}
