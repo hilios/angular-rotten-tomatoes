@@ -5,13 +5,21 @@ describe('rottenTomatoesApi', function() {
     function(_rottenTomatoesApi_, _$http_) {
       rottenTomatoesApi = _rottenTomatoesApi_;
       $http = _$http_;
+      // Stub $http.jsonp method.
+      sinon.spy($http, 'jsonp');
     }
   ));
 
-  it.skip('should have a config object', function() {
+  afterEach(function() {
+    // Restore $http.jsonp.
+    $http.jsonp.restore();
+  });
+
+  it('should have a config object', function() {
     expect(rottenTomatoesApi).to.have.property('config').that.is.an('object');
-    expect(rottenTomatoesApi.config.params).to.have.property('limit');
-    expect(rottenTomatoesApi.config.params).to.have.property('country');
+    expect(rottenTomatoesApi.config).to.have.property('params');
+    expect(rottenTomatoesApi.config.params).to.have.property('apikey');
+    expect(rottenTomatoesApi.config.params).to.have.property('callback');
   });
 
   describe('.request(uri, config)', function() {
@@ -26,23 +34,27 @@ describe('rottenTomatoesApi', function() {
 
     it('should have api key and callback appended to call params', function() {
       var config;
-      // Stub $http.jsonp method.
-      sinon.spy($http, 'jsonp');
       // Call api.request().
       rottenTomatoesApi.request('/');
       // Test if stub was called.
       expect($http.jsonp).to.be.called;
-      // Reuest argument from last call.
-      config = $http.jsonp.getCall(0).args[1];
+      // Get argument from last call.
+      config = $http.jsonp.lastCall.args[1];
       // Check if config was sent properly.
       expect(config).to.be.ok;
       expect(config).to.be.an('object');
       expect(config).to.have.property('params');
       expect(config.params).to.have.property('apikey');
-      expect(config.params).to.have.property('callback')
-        .that.is.equal('JSON_CALLBACK');
-      // Restore $http.jsonp.
-      $http.jsonp.restore();
+      expect(config.params).to.have.property('callback').that.is
+        .equal('JSON_CALLBACK');
+    });
+
+    it('should convert convert camel case params to snake case', function() {
+      rottenTomatoesApi.request('/', {pageLimit: 10});
+      expect($http.jsonp).to.be.called;
+      // Get argument from last call.
+      params = $http.jsonp.lastCall.args[1].params;
+      expect(params).to.have.property('page_limit');
     });
   });
 });

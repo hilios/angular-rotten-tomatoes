@@ -1,6 +1,6 @@
 /**
  * Rotten Tomatoes service provider to access API data.
- * http://developer.rottentomatoes.com/io-docs
+ * http://developer.rottentomatoes.com/docs
  */
 angular.module('ngRottenTomatoes')
 .provider('rottenTomatoesApi', function RottenTomatoesApiProvider() {
@@ -33,6 +33,22 @@ angular.module('ngRottenTomatoes')
     return provider.config;
   };
 
+  /**
+   * Convert the keys of an object from camelCase to snake_case.
+   * @param {Object} src - the source object.
+   * @return {Object}
+   */
+  function _snakeCaseKeys(src) {
+    var dest = {};
+    for (key in src) {
+      if (src.hasOwnProperty(key)) {
+        key = key
+        dest[key.replace(/([A-Z]{1,})/g, '_$1').toLowerCase()] = src[key];
+      }
+    }
+    return dest;
+  }
+
   this.$get = ['$http', '$log', function($http, $log) {
     // Warn if key is missing
     if (!angular.isString(provider.key)) {
@@ -48,7 +64,10 @@ angular.module('ngRottenTomatoes')
     function _request(uri, params) {
       var _params = params || {},
         _url = provider.endpoint + uri.replace(/^\//, ''),
-        _config = angular.extend({params: _params}, provider.config);
+        _config = angular.copy(provider.config);
+
+      // Convert and merge params
+      angular.extend(_config.params, _snakeCaseKeys(_params))
 
       $log.debug('Requesting ' + _url);
 
