@@ -28,8 +28,7 @@ describe('rottenTomatoesApi', function() {
     });
 
     it('should return a promise', function() {
-      expect(rottenTomatoesApi.request('/')).to.have.property('then')
-        .that.is.a('function');
+      expect(rottenTomatoesApi.request('/')).to.be.a.promise;
     });
 
     it('should have api key and callback appended to call params', function() {
