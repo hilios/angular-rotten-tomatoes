@@ -22,7 +22,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _topRentals(params) {
-    return rottenTomatoesApi.request('/');
+    return rottenTomatoesApi.request('/lists/dvds/top_rentals.json', params);
   }
 
   /**
@@ -35,7 +35,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _currentReleases(params) {
-    return rottenTomatoesApi.request('/');
+    return rottenTomatoesApi.request('/lists/dvds/current_releases.json', params);
   }
 
   /**
@@ -48,7 +48,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _newReleases(params) {
-    return rottenTomatoesApi.request('/');
+    return rottenTomatoesApi.request('/lists/dvds/new_releases.json', params);
   }
 
   /**
@@ -61,7 +61,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _upcoming(params) {
-    return rottenTomatoesApi.request('/');
+    return rottenTomatoesApi.request('/lists/dvds/upcoming.json', params);
   }
 
   return {

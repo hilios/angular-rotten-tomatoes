@@ -24,13 +24,12 @@ angular.module('ngRottenTomatoes')
   };
 
   /**
-   * Extends the API defaults object with custom values.
-   * @param {Object} newDefault - Source object.
-   * @return {Object} default - Destination object after extension.
+   * Extends the API defaults params object with custom values.
+   * @param {Object} defaults - Source object.
+   * @return {Object}
    */
-  this.setConfig = function(config) {
-    provider.config = angular.extend(provider.config, config || {});
-    return provider.config;
+  this.setDefauls = function(defaults) {
+    provider.config = angular.extend(provider.config.params, defaults || {});
   };
 
   /**
@@ -78,6 +77,10 @@ angular.module('ngRottenTomatoes')
         $log.error(error);
         return error;
       });
+    }
+
+    function _requestId(id, uri, params) {
+      return _request(uri.replace(/:id/, id), params);
     }
 
     return {
