@@ -7,26 +7,31 @@ var gulp = require('gulp'),
 var pkg = require('./bower.json')
     fs = require('fs');
 
-var dev = {
-  mangle: false,
-  compress: true,
-  preserveComments: 'some',
-  output: {
-    beautify: true,
-    indent_level: 2,
-    ascii_only: true,
-    comments: false,
-    width: 80
-  }
-};
 
-var prod = {
-  mangle: true,
-  preserveComments: 'some',
-  compress: {
-    global_defs: 'angular'
-  }
-};
+function dev() {
+  return uglify({
+    mangle: false,
+    compress: true,
+    preserveComments: 'some',
+    output: {
+      beautify: true,
+      indent_level: 2,
+      ascii_only: true,
+      comments: false,
+      width: 80
+    }
+  });
+}
+
+function prod() {
+  return uglify({
+    mangle: true,
+    preserveComments: 'some',
+    compress: {
+      global_defs: 'angular'
+    }
+  });
+}
 
 function min(path) {
   path.basename += ".min";
@@ -52,12 +57,12 @@ gulp.task('build', function() {
   gulp.src('src/*.js')
     .pipe(include())
     // Dev file
-    .pipe(uglify(dev))
+    .pipe(dev())
     .pipe(banner())
     .pipe(gulp.dest('dist/'))
     // Prod file
     .pipe(rename(min))
-    .pipe(uglify(prod))
+    .pipe(prod())
     .pipe(banner())
     .pipe(gulp.dest('dist/'));
 });
