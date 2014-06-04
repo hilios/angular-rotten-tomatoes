@@ -1,4 +1,4 @@
-Angular Rotten Tomatoes
+Angular Rotten Tomatoes ![Build Status](https://api.travis-ci.org/hilios/angular-rotten-tomatoes.svg)
 =======================
 
 Wraps the Rotten Tomatoes API into a AngularJS service.
