@@ -41,4 +41,4 @@ function RottenTomatoesMovie(api) {
     similar: _similar,
     clips: _clips
   }
-});
+}

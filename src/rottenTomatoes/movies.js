@@ -3,7 +3,7 @@ function RottenTomatoesMovies(api) {
    * @return {HttpPromise}
    */
   function _search(q, params) {
-    angular.extend(params, {q: q});
+    angular.extend(params || {}, {q: q});
     return api.request('/movies.json', params);
   }
 
@@ -42,4 +42,4 @@ function RottenTomatoesMovies(api) {
     opening: _opening,
     upcoming: _upcoming
   };
-});
+}

@@ -1,4 +1,4 @@
-function RottenTomatoesList(api) {
+function RottenTomatoesLists(api) {
   /**
    * @return {HttpPromise}
    */
@@ -23,4 +23,4 @@ function RottenTomatoesList(api) {
     movies: _movies,
     dvds: _dvds
   };
-};
+}

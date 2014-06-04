@@ -1,11 +1,11 @@
-describe('rottenTomatoesApiProvider', function() {
+describe('rottenTomatoesProvider', function() {
   var provider;
 
   beforeEach(function() {
     angular.module('testModule', function() {})
-    .config(['rottenTomatoesApiProvider' ,
-      function(rottenTomatoesApiProvider) {
-        provider = rottenTomatoesApiProvider;
+    .config(['rottenTomatoesProvider' ,
+      function(rottenTomatoesProvider) {
+        provider = rottenTomatoesProvider;
       }
     ]);
     // Initialize test module injector.
@@ -30,7 +30,7 @@ describe('rottenTomatoesApiProvider', function() {
     expect(provider).to.have.property('config').that.is.an('object');
   });
 
-  describe('.setKey(value)', function() {
+  describe('#setKey(value)', function() {
     it('should be a function', function() {
       expect(provider).to.have.property('setKey').that.is.a('function');
     });
@@ -41,13 +41,13 @@ describe('rottenTomatoesApiProvider', function() {
     });
   });
 
-  describe('.setConfig(object)', function() {
+  describe('#setDefaults(object)', function() {
     it('should be a function', function() {
-      expect(provider).to.have.property('setConfig').that.is.a('function');
+      expect(provider).to.have.property('setDefaults').that.is.a('function');
     });
 
     it('should extend the provider $http config property', function() {
-      var config = provider.setConfig({foo: 'bar'});
+      var config = provider.setDefaults({foo: 'bar'});
 
       expect(config).to.be.an('object');
       expect(provider.config).to.be.equal(config);
@@ -55,9 +55,10 @@ describe('rottenTomatoesApiProvider', function() {
     });
   });
 
-  describe('.$get()', function() {
-    it('should be a function', function() {
-      expect(provider).to.have.property('$get').that.is.a('array');
+  describe('$get', function() {
+    it('should be a injection object', function() {
+      expect(provider).to.have.property('$get').that.is.an('array');
+      expect(provider.$get[provider.$get.length - 1]).that.is.a('function');
     });
   });
 });

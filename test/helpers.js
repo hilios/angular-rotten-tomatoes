@@ -14,8 +14,8 @@ chai.use(function(_chai, utils) {
 angular.module('ngRottenTomatoesTestSuite', [
   'ngRottenTomatoes', 'ngRottenTomatoesMocks'
 ])
-.config(function (rottenTomatoesApiProvider) {
-  rottenTomatoesApiProvider.setKey('abcdefghijklmnopqrstuvwxyz0123456789');
+.config(function (rottenTomatoesProvider) {
+  rottenTomatoesProvider.setKey('abcdefghijklmnopqrstuvwxyz0123456789');
 });
 
 beforeEach(module('ngRottenTomatoesTestSuite'));

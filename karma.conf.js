@@ -9,7 +9,8 @@ module.exports = function(config) {
     files: [
       'test/vendor/angular/angular.js',
       'test/vendor/angular-mocks/angular-mocks.js',
-      'src/**/*.js',
+      'src/rottenTomatoes/**/*.js',
+      'src/ngRottenTomatoes.js',
       'test/mocks/module.js',
       'test/mocks/**/*.js',
       'test/helpers.js',
@@ -34,7 +35,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: [
-      'Chrome'
+      'PhantomJS'
     ],
     singleRun: false
   });

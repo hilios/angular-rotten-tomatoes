@@ -31,6 +31,7 @@ function RottenTomatoesProvider() {
    */
   provider.setDefaults = function(defaults) {
     provider.config = angular.extend(provider.config.params, defaults || {});
+    return provider.config;
   };
 
   /**
@@ -49,13 +50,18 @@ function RottenTomatoesProvider() {
     return dest;
   }
 
+  /**
+   * Rotten Tomatoes Service Factory.
+   * @require {$http}
+   * @require {$log}
+   */
   function RottenTomatoesFactory($http, $log) {
     // Warn if key is missing
     if (!angular.isString(provider.key)) {
       throw 'Missing Rotten Tomatoes API key.';
     }
 
-    var api = this;
+    var api = {};
 
     /**
      * Performs a request to Rotten Tomatoes API. Wrapping the $http service to
@@ -92,26 +98,24 @@ function RottenTomatoesProvider() {
      * @return {HttpPromise}
      */
     api.requestId = function(id, uri, params) {
-      return _request(uri.replace(/:id/, id.toString()), params);
+      return api.request(uri.replace(/:id/, id), params);
     }
 
     /**
-     * Returns the API config used has the $http params.
+     * Returns the API config object.
      * @return {Object}
      */
-    api.config = function() {
-      return provider.config;
-    };
+    api.config = provider.config;
 
     return {
       $$api: api,
       dvds: RottenTomatoesDvds(api),
       movies: RottenTomatoesMovies(api),
-      movie: RottenTomatoesMovies(api),
+      movie: RottenTomatoesMovie(api),
       lists: RottenTomatoesLists(api)
     };
   }
 
   // Setup the factory
   this.$get = ['$http', '$log', RottenTomatoesFactory];
-};
+}
