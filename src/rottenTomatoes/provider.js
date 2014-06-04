@@ -66,21 +66,21 @@ function RottenTomatoesProvider() {
     /**
      * Performs a request to Rotten Tomatoes API. Wrapping the $http service to
      * format the correct params.
-     * @param {String} URI - The uniform resource identifier.
+     * @param {String} URN - The uniform resource name.
      * @param {Object} [config] - Optional configuration object.
      * @return {HttpPromise}
      */
-    api.request = function(uri, params) {
+    api.request = function(urn, params) {
       var _params = params || {},
-        _url = provider.endpoint + uri.replace(/^\//, ''),
+        _uri = provider.endpoint + urn.replace(/^\//, ''),
         _config = angular.copy(provider.config);
 
       // Convert and merge params
       angular.extend(_config.params, _snakeCaseKeys(_params))
 
-      $log.debug('Requesting ' + _url);
+      $log.debug('Requesting ' + _uri);
 
-      return $http.jsonp(_url, _config).then(function(response) {
+      return $http.jsonp(_uri, _config).then(function(response) {
         $log.debug(response.status + ' ' + response.config.url);
         return response;
       }, function(error) {
@@ -93,12 +93,12 @@ function RottenTomatoesProvider() {
      * Performs a request to Rotten Tomatoes API replacing any :id key in the
      * URI by the given value.
      * @param {*} id - The id to be replaced.
-     * @param {String} URI - The uniform resource identifier.
+     * @param {String} URN - The uniform resource name.
      * @param {Object} [config] - Optional configuration object.
      * @return {HttpPromise}
      */
-    api.requestId = function(id, uri, params) {
-      return api.request(uri.replace(/:id/, id), params);
+    api.requestId = function(id, urn, params) {
+      return api.request(urn.replace(/:id/, id), params);
     }
 
     /**
@@ -108,7 +108,7 @@ function RottenTomatoesProvider() {
     api.config = provider.config;
 
     return {
-      $$api: api,
+      $api: api,
       dvds: RottenTomatoesDvds(api),
       movies: RottenTomatoesMovies(api),
       movie: RottenTomatoesMovie(api),

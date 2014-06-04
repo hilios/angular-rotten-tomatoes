@@ -15,37 +15,53 @@ describe('rottenTomatoes', function() {
     $http.jsonp.restore();
   });
 
-  it('should expose $$api', function() {
-    expect(rottenTomatoes).to.have.property('$$api').that.is.an('object');
+  it('should expose $api', function() {
+    expect(rottenTomatoes).to.have.property('$api').that.is.an('object');
   });
 
-  describe('$$api', function() {
-    var $$api;
+  it('should expose #dvds methods', function() {
+    expect(rottenTomatoes).to.have.property('dvds').that.is.an('object');
+  });
+
+  it('should expose #lists methods', function() {
+    expect(rottenTomatoes).to.have.property('lists').that.is.an('object');
+  });
+
+  it('should expose #movie methods', function() {
+    expect(rottenTomatoes).to.have.property('movie').that.is.an('object');
+  });
+
+  it('should expose #movies methods', function() {
+    expect(rottenTomatoes).to.have.property('movies').that.is.an('object');
+  });
+
+  describe('$api', function() {
+    var $api;
 
     beforeEach(function() {
-      $$api = rottenTomatoes.$$api;
+      $api = rottenTomatoes.$api;
     });
 
     it('should have a config object', function() {
-      expect($$api).to.have.property('config').that.is.an('object');
-      expect($$api.config).to.have.property('params');
-      expect($$api.config.params).to.have.property('apikey');
-      expect($$api.config.params).to.have.property('callback');
+      expect($api).to.have.property('config').that.is.an('object');
+      expect($api.config).to.have.property('params');
+      expect($api.config.params).to.have.property('apikey');
+      expect($api.config.params).to.have.property('callback');
     });
 
     describe('#request(uri, config)', function() {
       it('should have method', function() {
-        expect($$api).to.have.property('request').that.is.a('function');
+        expect($api).to.have.property('request').that.is.a('function');
       });
 
       it('should return a promise', function() {
-        expect($$api.request('/')).to.be.a.promise;
+        expect($api.request('/')).to.be.a.promise;
       });
 
       it('should have api key and callback appended to call params', function() {
         var config;
         // Call api.request().
-        $$api.request('/');
+        $api.request('/');
         // Test if stub was called.
         expect($http.jsonp).to.be.called;
         // Get argument from last call.
@@ -60,7 +76,7 @@ describe('rottenTomatoes', function() {
       });
 
       it('should convert convert camel case params to snake case', function() {
-        $$api.request('/', {pageLimit: 10});
+        $api.request('/', {pageLimit: 10});
         expect($http.jsonp).to.be.called;
         // Get argument from last call.
         params = $http.jsonp.lastCall.args[1].params;
