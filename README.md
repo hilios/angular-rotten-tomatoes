@@ -31,11 +31,13 @@ function AppCtrl(rottenTomatoes) {
   rottenTomatoes.upcomingDvds();
 
   // Movies Directory
-  rottenTomatoes.search(query);
   rottenTomatoes.boxOffice();
   rottenTomatoes.inTheaters();
   rottenTomatoes.opening();
   rottenTomatoes.upcomingMovies();
+
+  // Movies Search
+  rottenTomatoes.search(query);
 
   // Movie information
   rottenTomatoes.movieInfo(id);

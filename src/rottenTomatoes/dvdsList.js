@@ -1,7 +1,7 @@
 /**
  * Rotten Tomatoes DVDs Lists Directory.
  * http://developer.rottentomatoes.com/docs/json/v10/DVD_Lists_Directory
- * @requires rottenTomatoes.$api
+ * @param $api Rotten Tomatoes API wrapper.
  * @return {Object}
  *
  * @description
@@ -62,7 +62,7 @@ function RottenTomatoesDvdsList($api) {
    * @param {String} [params.country] The country to get data.
    * @return {HttpPromise}
    */
-  function upcoming(params) {
+  function upcomingDvds(params) {
     return $api.request('/lists/dvds/upcoming.json', params,
       ['pageLimit', 'page', 'country']);
   }
@@ -71,6 +71,6 @@ function RottenTomatoesDvdsList($api) {
     topRentals: topRentals,
     currentReleases: currentReleases,
     newReleases: newReleases,
-    upcoming: upcoming
+    upcomingDvds: upcomingDvds
   };
 }

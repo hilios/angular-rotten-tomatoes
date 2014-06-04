@@ -57,11 +57,7 @@ function RottenTomatoesProvider() {
    * @return {Object}
    *
    * @description
-   * Return all endpoints services provided by the Rotten Tomatoes API organized
-   * into an object structure for each section:
-   *  - DVDs List Directory
-   *  - Movies List Directory
-   *  - Movie Information
+   * Return all endpoints services provided by the Rotten Tomatoes API.
    */
   function RottenTomatoesFactory($http, $log) {
     // Warn if key is missing
@@ -69,7 +65,8 @@ function RottenTomatoesProvider() {
       throw 'Missing Rotten Tomatoes API key.';
     }
 
-    var api = {};
+    var factoryDefinition = {},
+        $api = {};
 
     /**
      * Performs a request to Rotten Tomatoes API. Wrapping the $http service to
@@ -78,10 +75,10 @@ function RottenTomatoesProvider() {
      * @param {Object} [config] - Optional configuration object.
      * @return {HttpPromise}
      */
-    api.request = function(urn, params) {
+    $api.request = function(urn, params) {
       var _params = params || {},
-        _uri = provider.url + urn.replace(/^\//, ''),
-        _config = angular.copy(provider.config);
+          _uri = provider.url + urn.replace(/^\//, ''),
+          _config = angular.copy(provider.config);
 
       // Convert and merge params
       angular.extend(_config.params, _snakeCaseKeys(_params))
@@ -105,22 +102,23 @@ function RottenTomatoesProvider() {
      * @param {Object} [config] - Optional configuration object.
      * @return {HttpPromise}
      */
-    api.requestId = function(id, urn, params) {
-      return api.request(urn.replace(/:id/, id), params);
+    $api.requestId = function(id, urn, params) {
+      return $api.request(urn.replace(/:id/, id), params);
     }
 
     /**
      * Returns the API config object.
      * @return {Object}
      */
-    api.config = provider.config;
+    $api.config = provider.config;
 
-    return {
-      $api: api,
-      movie: RottenTomatoesMovie(api),
-      movies: RottenTomatoesMovies(api),
-      dvds: RottenTomatoesDvds(api)
-    };
+    // Define the factory methods
+    angular.extend(factoryDefinition, {'$api': $api});
+    angular.extend(factoryDefinition, RottenTomatoesMovieDetails($api));
+    angular.extend(factoryDefinition, RottenTomatoesMoviesList($api));
+    angular.extend(factoryDefinition, RottenTomatoesDvdsList($api));
+
+    return factoryDefinition;
   }
 
   // Setup the factory

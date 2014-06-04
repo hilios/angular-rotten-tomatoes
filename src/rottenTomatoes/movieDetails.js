@@ -1,16 +1,16 @@
 /**
  * Rotten Tomatoes Movie Details.
- * @requires rottenTomatoes.$api
+ * @param $api Rotten Tomatoes API wrapper
  * @return {Object}
  *
  * @description
  * Expose all method to fetch movie details available in Rotten Tomatoes:
- *  - Info
- *  - Reviews
- *  - Cast
- *  - Similar
- *  - Clips
- *  - Alias
+ *  - movieInfo
+ *  - movieReviews
+ *  - movieCast
+ *  - movieSimilar
+ *  - movieClips
+ *  - movieAlias
  */
 function RottenTomatoesMovieDetails($api) {
   /**
@@ -19,7 +19,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number|String} id The movie ID.
    * @return {HttpPromise}
    */
-  function info(id) {
+  function movieInfo(id) {
     return $api.requestId(id, '/movies/:id.json');
   }
 
@@ -35,7 +35,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number} [params.country] The country to get data.
    * @return {HttpPromise}
    */
-  function reviews(id, params) {
+  function movieReviews(id, params) {
     return $api.requestId(id, '/movies/:id/reviews.json', params,
       ['reviewType', 'pageLimit', 'page', 'country']);
   }
@@ -46,7 +46,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number|String} id The movie ID.
    * @return {HttpPromise}
    */
-  function cast(id) {
+  function movieCast(id) {
     return $api.requestId(id, '/movies/:id/cast.json');
   }
 
@@ -58,7 +58,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number} [params.limit] Limits the number of returned data.
    * @return {HttpPromise}
    */
-  function similar(id, params) {
+  function movieSimilar(id, params) {
     return $api.requestId(id, '/movies/:id/similar.json', params,
       ['limit']);
   }
@@ -68,7 +68,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number|String} id The movie ID.
    * @return {HttpPromise}
    */
-  function clips(id) {
+  function movieClips(id) {
     return $api.requestId(id, '/movies/:id/clips.json');
   }
 
@@ -78,7 +78,7 @@ function RottenTomatoesMovieDetails($api) {
    * @param {Number|String} id The id you want to look up.
    * @return {HttpPromise}
    */
-  function alias(id) {
+  function movieAlias(id) {
     return $api.request('/movies/movie_alias.json', {
       id: id,
       alias: 'imdb'
@@ -86,11 +86,11 @@ function RottenTomatoesMovieDetails($api) {
   }
 
   return {
-    info: info,
-    reviews: reviews,
-    cast: cast,
-    similar: similar,
-    clips: clips,
-    alias: alias
+    movieInfo: movieInfo,
+    movieReviews: movieReviews,
+    movieCast: movieCast,
+    movieSimilar: movieSimilar,
+    movieClips: movieClips,
+    movieAlias: movieAlias
   }
 }

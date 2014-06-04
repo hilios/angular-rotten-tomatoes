@@ -1,8 +1,8 @@
 /**
- * Rotten Tomatoes Movies Search and Movies List Diretctory.
+ * Rotten Tomatoes Movies Search and Movies List Directory.
  * http://developer.rottentomatoes.com/docs/read/json/v10/Movies_Search
  * http://developer.rottentomatoes.com/docs/read/json/v10/Movie_Lists_Directory
- * @requires rottenTomatoes.$api
+ * @param $api Rotten Tomatoes API wrapper
  * @return {Object}
  *
  * @description
@@ -13,7 +13,7 @@
  *  - Opening
  *  - Upcoming
  */
-function RottenTomatoesMoviesList(api) {
+function RottenTomatoesMoviesList($api) {
   /**
    * Search movies with plain text queries.
    * http://developer.rottentomatoes.com/docs/read/json/v10/Movies_Search
@@ -25,7 +25,7 @@ function RottenTomatoesMoviesList(api) {
    */
   function search(q, params) {
     angular.extend(params || {}, {q: q});
-    return api.request('/movies.json', params,
+    return $api.request('/movies.json', params,
       ['pageLimit', 'page', 'country']);
   }
 
@@ -39,7 +39,7 @@ function RottenTomatoesMoviesList(api) {
    * @return {HttpPromise}
    */
   function boxOffice(params) {
-    return api.request('/lists/movies/box_office.json', params,
+    return $api.request('/lists/movies/box_office.json', params,
       ['limit', 'country']);
   }
 
@@ -53,7 +53,7 @@ function RottenTomatoesMoviesList(api) {
    * @return {HttpPromise}
    */
   function inTheaters(params) {
-    return api.request('/lists/movies/in_theaters.json', params,
+    return $api.request('/lists/movies/in_theaters.json', params,
       ['pageLimit', 'page', 'country']);
   }
 
@@ -66,7 +66,7 @@ function RottenTomatoesMoviesList(api) {
    * @return {HttpPromise}
    */
   function opening(params) {
-    return api.request('/lists/movies/opening.json', params,
+    return $api.request('/lists/movies/opening.json', params,
       ['limit', 'country']);
   }
 
@@ -80,7 +80,7 @@ function RottenTomatoesMoviesList(api) {
    * @return {HttpPromise}
    */
   function upcoming(params) {
-    return api.request('/lists/movies/upcoming.json', params,
+    return $api.request('/lists/movies/upcoming.json', params,
       ['pageLimit', 'page', 'country']);
   }
 
