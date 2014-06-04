@@ -52,17 +52,16 @@ function RottenTomatoesProvider() {
 
   /**
    * Rotten Tomatoes Service Factory.
-   * @requires {$http}
-   * @requires {$log}
+   * @requires $http
+   * @requires $log
    * @return {Object}
    *
    * @description
    * Return all endpoints services provided by the Rotten Tomatoes API organized
    * into an object structure for each section:
-   *  - DVDs List
-   *  - Movies List
+   *  - DVDs List Directory
+   *  - Movies List Directory
    *  - Movie Information
-   *  - Lists Directory
    */
   function RottenTomatoesFactory($http, $log) {
     // Warn if key is missing
@@ -100,7 +99,7 @@ function RottenTomatoesProvider() {
 
     /**
      * Performs a request to Rotten Tomatoes API replacing any :id key in the
-     * URI by the given value.
+     * URN by the given value.
      * @param {*} id - The id to be replaced.
      * @param {String} URN - The uniform resource name.
      * @param {Object} [config] - Optional configuration object.
@@ -118,10 +117,9 @@ function RottenTomatoesProvider() {
 
     return {
       $api: api,
-      dvds: RottenTomatoesDvds(api),
-      movies: RottenTomatoesMovies(api),
       movie: RottenTomatoesMovie(api),
-      lists: RottenTomatoesLists(api)
+      movies: RottenTomatoesMovies(api),
+      dvds: RottenTomatoesDvds(api)
     };
   }
 

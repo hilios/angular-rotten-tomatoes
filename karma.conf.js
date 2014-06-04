@@ -23,9 +23,7 @@ module.exports = function(config) {
       'test/vendor/angular-mocks/angular-mocks.js',
       'src/rottenTomatoes/**/*.js',
       'src/ngRottenTomatoes.js',
-      'test/mocks/module.js',
-      'test/mocks/**/*.js',
-      'test/helpers.js',
+      'test/config.js',
       'test/**/*Spec.js'
     ],
     exclude: [

@@ -23,10 +23,6 @@ describe('rottenTomatoes', function() {
     expect(rottenTomatoes).to.have.property('dvds').that.is.an('object');
   });
 
-  it('should expose #lists methods', function() {
-    expect(rottenTomatoes).to.have.property('lists').that.is.an('object');
-  });
-
   it('should expose #movie methods', function() {
     expect(rottenTomatoes).to.have.property('movie').that.is.an('object');
   });
