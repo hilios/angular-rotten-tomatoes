@@ -1,4 +1,4 @@
-describe('rottenTomatoes.dvds', function() {
+describe('RottenTomatoesDvdsList', function() {
   var dvds, $api, PARAMS = {'country': 'foo'};
 
   beforeEach(inject(

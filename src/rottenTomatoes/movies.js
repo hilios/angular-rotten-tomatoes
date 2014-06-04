@@ -13,7 +13,7 @@
  *  - Opening
  *  - Upcoming
  */
-function RottenTomatoesMovies(api) {
+function RottenTomatoesMoviesList(api) {
   /**
    * Search movies with plain text queries.
    * http://developer.rottentomatoes.com/docs/read/json/v10/Movies_Search

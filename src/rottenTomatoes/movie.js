@@ -12,7 +12,7 @@
  *  - Clips
  *  - Alias
  */
-function RottenTomatoesMovie($api) {
+function RottenTomatoesMovieDetails($api) {
   /**
    * Retrieves detailed information on a specific movie specified by ID.
    * http://developer.rottentomatoes.com/docs/json/v10/Movie_Info

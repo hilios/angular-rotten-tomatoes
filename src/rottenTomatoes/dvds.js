@@ -11,7 +11,7 @@
  *  - New Releases
  *  - Upcoming
  */
-function RottenTomatoesDvds($api) {
+function RottenTomatoesDvdsList($api) {
   /**
    * Retrieves the current top dvd rentals.
    * http://developer.rottentomatoes.com/docs/json/v10/Top_Rentals

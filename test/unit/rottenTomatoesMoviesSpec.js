@@ -1,4 +1,4 @@
-describe('rottenTomatoes.movies', function() {
+describe('RottenTomatoesMoviesList', function() {
   var movies, $api, PARAMS = {'country': 'foo'};
 
   beforeEach(inject(

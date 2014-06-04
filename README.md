@@ -25,28 +25,23 @@ function AppCtrl(rottenTomatoes) {
 ```js
 function AppCtrl(rottenTomatoes) {
   // DVDs Directory
-  rottenTomatoes.dvds.topRentals();
-  rottenTomatoes.dvds.currentReleases();
-  rottenTomatoes.dvds.newReleases();
-  rottenTomatoes.dvds.upcoming();
+  rottenTomatoes.topRentals();
+  rottenTomatoes.currentReleases();
+  rottenTomatoes.newReleases();
+  rottenTomatoes.upcomingDvds();
 
   // Movies Directory
-  rottenTomatoes.movies.search(query);
-  rottenTomatoes.movies.boxOffice();
-  rottenTomatoes.movies.inTheaters();
-  rottenTomatoes.movies.opening();
-  rottenTomatoes.movies.upcoming();
+  rottenTomatoes.search(query);
+  rottenTomatoes.boxOffice();
+  rottenTomatoes.inTheaters();
+  rottenTomatoes.opening();
+  rottenTomatoes.upcomingMovies();
 
   // Movie information
-  rottenTomatoes.movie.info(id);
-  rottenTomatoes.movie.reviews(id);
-  rottenTomatoes.movie.cast(id);
-  rottenTomatoes.movie.similar(id);
-  rottenTomatoes.movie.clips(id);
-
-  // Lists Directory
-  rottenTomatoes.lists.overview();
-  rottenTomatoes.lists.movies();
-  rottenTomatoes.lists.dvds();
+  rottenTomatoes.movieInfo(id);
+  rottenTomatoes.movieReviews(id);
+  rottenTomatoes.movieCast(id);
+  rottenTomatoes.movieSimilar(id);
+  rottenTomatoes.movieClips(id);
 }
 ```

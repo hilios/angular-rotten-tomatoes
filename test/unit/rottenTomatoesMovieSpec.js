@@ -1,4 +1,4 @@
-describe('rottenTomatoes.movie', function() {
+describe('RottenTomatoesMovieDetails', function() {
   var movie, $api, ID = '12345';
 
   beforeEach(inject(

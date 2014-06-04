@@ -1,4 +1,4 @@
-describe('rottenTomatoesProvider', function() {
+describe('RottenTomatoesProvider', function() {
   var provider;
 
   beforeEach(function() {
