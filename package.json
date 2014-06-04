@@ -1,15 +1,18 @@
 {
   "name": "angular-rotten-tomatoes",
-  "private": true,
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hilios/angular-rotten-tomatoes/"
+  },
   "devDependencies": {
     "karma": "~0.12",
-    "karma-chai-plugins": "~0.1",
-    "karma-coverage": "~0.1",
+    "karma-chai-plugins": "~0.2",
+    "karma-coverage": "~0.2",
     "karma-mocha": "~0.1",
     "karma-phantomjs-launcher": "~0.1"
   },
   "scripts": {
-    "test": "karma start --ci"
+    "test": "./node_modules/karma/bin/karma start --ci"
   }
 }

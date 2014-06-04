@@ -13,6 +13,10 @@
   "author": "Edson Hilios",
   "homepage": "http://hilios.github.io/angular-rotten-tomatoes/",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hilios/angular-rotten-tomatoes/"
+  },
   "bugs": {
     "url": "https://github.com/hilios/angular-rotten-tomatoes/issues"
   },
