@@ -8,5 +8,8 @@
     "karma-coverage": "~0.1",
     "karma-mocha": "~0.1",
     "karma-phantomjs-launcher": "~0.1"
+  },
+  "scripts": {
+    "test": "karma start --ci"
   }
 }
