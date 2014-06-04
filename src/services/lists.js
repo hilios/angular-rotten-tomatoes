@@ -1,24 +1,21 @@
-angular.module('ngRottenTomatoes')
-.service('rottenTomatoesLists', function(rottenTomatoesApi) {
+function RottenTomatoesList(api) {
   /**
    * @return {HttpPromise}
    */
   function _overview() {
-    return rottenTomatoesApi.request('/');
+    return api.request('/');
   }
 
   /**
    * @return {HttpPromise}
    */
   function _movies() {
-    return rottenTomatoesApi.request('/');
+    return api.request('/');
   }
 
-  /**
-   * @return {HttpPromise}
-   */
+
   function _dvds() {
-    return rottenTomatoesApi.request('/');
+    return api.request('/');
   }
 
   return {
@@ -26,4 +23,4 @@ angular.module('ngRottenTomatoes')
     movies: _movies,
     dvds: _dvds
   };
-});
+};

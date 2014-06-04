@@ -2,12 +2,13 @@
  * Rotten Tomatoes service provider to access API data.
  * http://developer.rottentomatoes.com/docs
  */
-angular.module('ngRottenTomatoes')
-.provider('rottenTomatoesApi', function RottenTomatoesApiProvider() {
+function RottenTomatoesProvider() {
   var provider = this;
 
-  provider.endpoint = 'http://api.rottentomatoes.com/api/public/v1.0/';
   provider.key = null;
+  provider.apiVersion = 'v1.0';
+  provider.endpoint = 'http://api.rottentomatoes.com/api/public/:version/'
+    .replace(/:version/, provider.apiVersion);
   provider.config = {
     params: {
       apikey: null,
@@ -19,7 +20,7 @@ angular.module('ngRottenTomatoes')
    * Set the API key.
    * @param {String} value - The Rotten Tomatoes API.
    */
-  this.setKey = function(value) {
+  provider.setKey = function(value) {
     provider.key = provider.config.params.apikey = value;
   };
 
@@ -28,7 +29,7 @@ angular.module('ngRottenTomatoes')
    * @param {Object} defaults - Source object.
    * @return {Object}
    */
-  this.setDefauls = function(defaults) {
+  provider.setDefaults = function(defaults) {
     provider.config = angular.extend(provider.config.params, defaults || {});
   };
 
@@ -48,19 +49,22 @@ angular.module('ngRottenTomatoes')
     return dest;
   }
 
-  this.$get = ['$http', '$log', function($http, $log) {
+  function RottenTomatoesFactory($http, $log) {
     // Warn if key is missing
     if (!angular.isString(provider.key)) {
       throw 'Missing Rotten Tomatoes API key.';
     }
 
+    var api = this;
+
     /**
-     * Wraps $http to format request to Rotten Tomatoes API.
+     * Performs a request to Rotten Tomatoes API. Wrapping the $http service to
+     * format the correct params.
      * @param {String} URI - The uniform resource identifier.
      * @param {Object} [config] - Optional configuration object.
      * @return {HttpPromise}
      */
-    function _request(uri, params) {
+    api.request = function(uri, params) {
       var _params = params || {},
         _url = provider.endpoint + uri.replace(/^\//, ''),
         _config = angular.copy(provider.config);
@@ -77,25 +81,37 @@ angular.module('ngRottenTomatoes')
         $log.error(error);
         return error;
       });
+    };
+
+    /**
+     * Performs a request to Rotten Tomatoes API replacing any :id key in the
+     * URI by the given value.
+     * @param {*} id - The id to be replaced.
+     * @param {String} URI - The uniform resource identifier.
+     * @param {Object} [config] - Optional configuration object.
+     * @return {HttpPromise}
+     */
+    api.requestId = function(id, uri, params) {
+      return _request(uri.replace(/:id/, id.toString()), params);
     }
 
-    function _requestId(id, uri, params) {
-      return _request(uri.replace(/:id/, id), params);
-    }
+    /**
+     * Returns the API config used has the $http params.
+     * @return {Object}
+     */
+    api.config = function() {
+      return provider.config;
+    };
 
     return {
-      /**
-       * Performe a request to Rotten Tomatoes API.
-       * @param {String} URI - The uniform resource identifier.
-       * @param {Object} [params] - Optional request params.
-       * @return {HttpPromise}
-       */
-      request: _request,
-      /**
-       * API $http config.
-       * @return {Object}
-       */
-      config: provider.config
+      $$api: api,
+      dvds: RottenTomatoesDvds(api),
+      movies: RottenTomatoesMovies(api),
+      movie: RottenTomatoesMovies(api),
+      lists: RottenTomatoesLists(api)
     };
-  }];
-});
+  }
+
+  // Setup the factory
+  this.$get = ['$http', '$log', RottenTomatoesFactory];
+};

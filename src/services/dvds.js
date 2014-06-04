@@ -1,7 +1,7 @@
 /**
  * Rotten Tomatoes Service to retrieve DVDs lists.
  * http://developer.rottentomatoes.com/docs/json/v10/DVD_Lists_Directory
- * @requires rottenTomatoesApi
+ * @requires rottenTomatoes
  * @return {Object}
  *
  * @description
@@ -11,8 +11,7 @@
  *  - New Releases
  *  - Upcoming
  */
-angular.module('ngRottenTomatoes')
-.service('rottenTomatoesDvds', function(rottenTomatoesApi) {
+function RottenTomatoesDvds(api) {
   /**
    * Retrieves the current top dvd rentals.
    * http://developer.rottentomatoes.com/docs/json/v10/Top_Rentals
@@ -22,7 +21,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _topRentals(params) {
-    return rottenTomatoesApi.request('/lists/dvds/top_rentals.json', params);
+    return api.request('/lists/dvds/top_rentals.json', params);
   }
 
   /**
@@ -35,7 +34,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _currentReleases(params) {
-    return rottenTomatoesApi.request('/lists/dvds/current_releases.json', params);
+    return api.request('/lists/dvds/current_releases.json', params);
   }
 
   /**
@@ -48,7 +47,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _newReleases(params) {
-    return rottenTomatoesApi.request('/lists/dvds/new_releases.json', params);
+    return api.request('/lists/dvds/new_releases.json', params);
   }
 
   /**
@@ -61,7 +60,7 @@ angular.module('ngRottenTomatoes')
    * @return {HttpPromise}
    */
   function _upcoming(params) {
-    return rottenTomatoesApi.request('/lists/dvds/upcoming.json', params);
+    return api.request('/lists/dvds/upcoming.json', params);
   }
 
   return {
@@ -70,4 +69,4 @@ angular.module('ngRottenTomatoes')
     newReleases: _newReleases,
     upcoming: _upcoming
   };
-});
+}
