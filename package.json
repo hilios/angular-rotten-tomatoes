@@ -6,6 +6,11 @@
     "url": "https://github.com/hilios/angular-rotten-tomatoes/"
   },
   "devDependencies": {
+    "gulp": "~3.7",
+    "gulp-header": "~1.0",
+    "gulp-include": "~0.2",
+    "gulp-rename": "~1.2",
+    "gulp-uglify": "~0.3",
     "karma": "~0.12",
     "karma-chai-plugins": "~0.2",
     "karma-coverage": "~0.2",
