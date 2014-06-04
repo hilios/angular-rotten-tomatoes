@@ -7,7 +7,7 @@ function RottenTomatoesProvider() {
 
   provider.key = null;
   provider.apiVersion = 'v1.0';
-  provider.endpoint = 'http://api.rottentomatoes.com/api/public/:version/'
+  provider.url = 'http://api.rottentomatoes.com/api/public/:version/'
     .replace(/:version/, provider.apiVersion);
   provider.config = {
     params: {
@@ -52,8 +52,17 @@ function RottenTomatoesProvider() {
 
   /**
    * Rotten Tomatoes Service Factory.
-   * @require {$http}
-   * @require {$log}
+   * @requires {$http}
+   * @requires {$log}
+   * @return {Object}
+   *
+   * @description
+   * Return all endpoints services provided by the Rotten Tomatoes API organized
+   * into an object structure for each section:
+   *  - DVDs List
+   *  - Movies List
+   *  - Movie Information
+   *  - Lists Directory
    */
   function RottenTomatoesFactory($http, $log) {
     // Warn if key is missing
@@ -72,7 +81,7 @@ function RottenTomatoesProvider() {
      */
     api.request = function(urn, params) {
       var _params = params || {},
-        _uri = provider.endpoint + urn.replace(/^\//, ''),
+        _uri = provider.url + urn.replace(/^\//, ''),
         _config = angular.copy(provider.config);
 
       // Convert and merge params

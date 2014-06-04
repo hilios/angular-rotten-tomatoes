@@ -18,8 +18,8 @@ describe('rottenTomatoesProvider', function() {
     expect(provider).to.be.ok;
   });
 
-  it('should have endpoint property', function() {
-    expect(provider).to.have.property('endpoint').that.is.a('string');
+  it('should have URL property', function() {
+    expect(provider).to.have.property('url').that.is.a('string');
   });
 
   it('should have key property', function() {

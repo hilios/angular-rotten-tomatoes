@@ -12,7 +12,7 @@ chai.use(function(_chai, utils) {
 
 // Configure an fake ApiKey
 angular.module('ngRottenTomatoesTestSuite', [
-  'ngRottenTomatoes', 'ngRottenTomatoesMocks'
+  'ngRottenTomatoes',
 ])
 .config(function (rottenTomatoesProvider) {
   rottenTomatoesProvider.setKey('abcdefghijklmnopqrstuvwxyz0123456789');

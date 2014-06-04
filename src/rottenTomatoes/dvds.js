@@ -1,7 +1,7 @@
 /**
  * Rotten Tomatoes Service to retrieve DVDs lists.
  * http://developer.rottentomatoes.com/docs/json/v10/DVD_Lists_Directory
- * @requires rottenTomatoes
+ * @requires rottenTomatoes.$api
  * @return {Object}
  *
  * @description
@@ -11,17 +11,17 @@
  *  - New Releases
  *  - Upcoming
  */
-function RottenTomatoesDvds(api) {
+function RottenTomatoesDvds($api) {
   /**
    * Retrieves the current top dvd rentals.
    * http://developer.rottentomatoes.com/docs/json/v10/Top_Rentals
    * @param {Object} params The accepted parameters.
-   * @config {Integer} [limit] Limits the number returned data.
+   * @config {Integer} [limit] Limits the number of returned data.
    * @config {String} [country] The country to get data.
    * @return {HttpPromise}
    */
   function _topRentals(params) {
-    return api.request('/lists/dvds/top_rentals.json', params);
+    return $api.request('/lists/dvds/top_rentals.json', params);
   }
 
   /**
@@ -34,7 +34,7 @@ function RottenTomatoesDvds(api) {
    * @return {HttpPromise}
    */
   function _currentReleases(params) {
-    return api.request('/lists/dvds/current_releases.json', params);
+    return $api.request('/lists/dvds/current_releases.json', params);
   }
 
   /**
@@ -47,7 +47,7 @@ function RottenTomatoesDvds(api) {
    * @return {HttpPromise}
    */
   function _newReleases(params) {
-    return api.request('/lists/dvds/new_releases.json', params);
+    return $api.request('/lists/dvds/new_releases.json', params);
   }
 
   /**
@@ -60,7 +60,7 @@ function RottenTomatoesDvds(api) {
    * @return {HttpPromise}
    */
   function _upcoming(params) {
-    return api.request('/lists/dvds/upcoming.json', params);
+    return $api.request('/lists/dvds/upcoming.json', params);
   }
 
   return {
