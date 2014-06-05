@@ -1,3 +1,2 @@
-test/vendor/
-test/mocks/
-dist/
+!test/vendor/**/*.js
+!test/mocks/**/*.js

@@ -25,15 +25,21 @@
   "maxstatements": false,
   "maxcomplexity": 8,
   "maxlen": 80,
-  "gcl": true,
+  "expr": true,
+  "gcl": false,
   "browser": true,
-  "devel": false,
+  "devel": true,
   "node": true,
   "globals": {
     "angular": true,
-    "RottenTomatoesProvider": true,
-    "RottenTomatoesMovieDetails": true,
-    "RottenTomatoesMoviesList": true,
-    "RottenTomatoesDvdsList": true
+    "module": true,
+    "inject": true,
+    "chai": true,
+    "expect": true,
+    "beforeEach": true,
+    "afterEach": true,
+    "describe": true,
+    "it": true,
+    "sinon": true
   }
 }

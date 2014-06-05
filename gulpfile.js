@@ -10,6 +10,7 @@ var gulp = require('gulp'),
 var pkg = require('./bower.json'),
     fs = require('fs');
 
+/* jshint camelcase:false:start */
 function dev() {
   return uglify({
     mangle: false,
@@ -34,6 +35,7 @@ function prod() {
     }
   });
 }
+/* jshint camelcase:false:end */
 
 function min(path) {
   path.basename += '.min';

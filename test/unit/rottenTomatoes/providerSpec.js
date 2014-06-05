@@ -107,7 +107,7 @@ describe('RottenTomatoesFactory', function() {
         expect($api.request('/')).to.be.a.promise;
       });
 
-      it('should have api key and callback appended to call params', function() {
+      it('should have key and callback appended to request params', function() {
         var config;
         // Call api.request().
         $api.request('/');
@@ -128,7 +128,7 @@ describe('RottenTomatoesFactory', function() {
         $api.request('/', {pageLimit: 10});
         expect($http.jsonp).to.be.called;
         // Get argument from last call.
-        params = $http.jsonp.lastCall.args[1].params;
+        var params = $http.jsonp.lastCall.args[1].params;
         expect(params).to.have.property('page_limit');
       });
     });
