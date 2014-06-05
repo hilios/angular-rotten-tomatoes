@@ -102,7 +102,7 @@
   function RottenTomatoesProvider() {
     function _snakeCaseKeys(src) {
       var dest = {};
-      for (key in src) src.hasOwnProperty(key) && (key = key, dest[key.replace(/([A-Z]{1,})/g, "_$1").toLowerCase()] = src[key]);
+      for (var key in src) src.hasOwnProperty(key) && (key = key, dest[key.replace(/([A-Z]{1,})/g, "_$1").toLowerCase()] = src[key]);
       return dest;
     }
     function RottenTomatoesFactory($http, $log) {
@@ -120,8 +120,8 @@
         return $api.request(urn.replace(/:id/, id), params);
       }, $api.config = provider.config, angular.extend(factoryDefinition, {
         $api: $api
-      }), angular.extend(factoryDefinition, RottenTomatoesMovieDetails($api)), angular.extend(factoryDefinition, RottenTomatoesMoviesList($api)), 
-      angular.extend(factoryDefinition, RottenTomatoesDvdsList($api)), factoryDefinition;
+      }), angular.extend(factoryDefinition, new RottenTomatoesMovieDetails($api)), angular.extend(factoryDefinition, new RottenTomatoesMoviesList($api)), 
+      angular.extend(factoryDefinition, new RottenTomatoesDvdsList($api)), factoryDefinition;
     }
     var provider = this;
     provider.key = null, provider.apiVersion = "v1.0", provider.url = "http://api.rottentomatoes.com/api/public/:version/".replace(/:version/, provider.apiVersion), 

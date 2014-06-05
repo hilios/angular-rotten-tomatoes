@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    bump = require('gulp-bump'),
     header = require('gulp-header'),
     include = require('gulp-include'),
     jshint = require('gulp-jshint'),
@@ -59,7 +60,7 @@ function banner() {
 }
 
 gulp.task('build', function() {
-  gulp.src('src/*.js')
+  return gulp.src('src/*.js')
     .pipe(include())
     // Dev file
     .pipe(dev())
@@ -72,13 +73,19 @@ gulp.task('build', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('pack', ['test', 'build'], function() {
+gulp.task('pack', ['test', 'build'], function(done) {
   gulp.src('dist/*.js')
     .pipe(zip(pkg.name + '-v' + pkg.version + '.zip'))
     .pipe(gulp.dest('build/'));
+
+  gulp.src('*.json')
+    .pipe(bump({version: pkg.version}))
+    .pipe(gulp.dest('./'));
+
+  done();
 });
 
-gulp.task('lint', function() {
+gulp.task('lint', function(done) {
   gulp.src('*.json')
     .pipe(jsonlint())
     .pipe(jsonlint.reporter());
@@ -86,25 +93,27 @@ gulp.task('lint', function() {
   gulp.src(['gulpfile.js', 'src/**/*.js', 'test/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+
+  done();
 });
 
-gulp.task('test', ['lint'], function() {
+gulp.task('test', ['lint'], function(done) {
   // Start karma
   karma.start({
     configFile: __dirname + '/karma.conf.js'
   }, function (exitCode) {
-    process.exit(exitCode);
+    done(exitCode);
   });
 });
 
-gulp.task('default', function() {
-  gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint']);
+gulp.task('default', function(done) {
+  gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint', 'build']);
   // Start karma with watch options
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     autoWatch: true,
     singleRun: false
   }, function (exitCode) {
-    process.exit(exitCode);
+    done(exitCode);
   });
 });
