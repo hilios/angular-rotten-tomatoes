@@ -11,7 +11,6 @@
     "gulp-include": "~0.2",
     "gulp-jshint": "~1.6",
     "gulp-jsonlint": "~0.0",
-    "gulp-karma": "~0.0",
     "gulp-rename": "~1.2",
     "gulp-uglify": "~0.3",
     "gulp-zip": "~0.3",
