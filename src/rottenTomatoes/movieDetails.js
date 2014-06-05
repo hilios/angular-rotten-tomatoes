@@ -92,5 +92,5 @@ function RottenTomatoesMovieDetails($api) {
     movieSimilar: movieSimilar,
     movieClips: movieClips,
     movieAlias: movieAlias
-  }
+  };
 }

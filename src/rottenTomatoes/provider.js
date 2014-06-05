@@ -41,9 +41,9 @@ function RottenTomatoesProvider() {
    */
   function _snakeCaseKeys(src) {
     var dest = {};
-    for (key in src) {
+    for (var key in src) {
       if (src.hasOwnProperty(key)) {
-        key = key
+        key = key;
         dest[key.replace(/([A-Z]{1,})/g, '_$1').toLowerCase()] = src[key];
       }
     }
@@ -81,7 +81,7 @@ function RottenTomatoesProvider() {
           _config = angular.copy(provider.config);
 
       // Convert and merge params
-      angular.extend(_config.params, _snakeCaseKeys(_params))
+      angular.extend(_config.params, _snakeCaseKeys(_params));
 
       $log.debug('Requesting ' + _uri);
 
@@ -104,7 +104,7 @@ function RottenTomatoesProvider() {
      */
     $api.requestId = function(id, urn, params) {
       return $api.request(urn.replace(/:id/, id), params);
-    }
+    };
 
     /**
      * Returns the API config object.
@@ -114,9 +114,9 @@ function RottenTomatoesProvider() {
 
     // Define the factory methods
     angular.extend(factoryDefinition, {'$api': $api});
-    angular.extend(factoryDefinition, RottenTomatoesMovieDetails($api));
-    angular.extend(factoryDefinition, RottenTomatoesMoviesList($api));
-    angular.extend(factoryDefinition, RottenTomatoesDvdsList($api));
+    angular.extend(factoryDefinition, new RottenTomatoesMovieDetails($api));
+    angular.extend(factoryDefinition, new RottenTomatoesMoviesList($api));
+    angular.extend(factoryDefinition, new RottenTomatoesDvdsList($api));
 
     return factoryDefinition;
   }

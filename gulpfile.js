@@ -1,12 +1,14 @@
 var gulp = require('gulp'),
+    jshint = require('gulp-jshint'),
+    jsonlint = require('gulp-jsonlint'),
     header = require('gulp-header'),
     include = require('gulp-include'),
     rename = require('gulp-rename'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    zip = require('gulp-zip');
 
-var pkg = require('./bower.json')
+var pkg = require('./bower.json'),
     fs = require('fs');
-
 
 function dev() {
   return uglify({
@@ -34,14 +36,14 @@ function prod() {
 }
 
 function min(path) {
-  path.basename += ".min";
+  path.basename += '.min';
 }
 
 function banner() {
   var today = new Date();
   var license = fs.readFileSync('./LICENSE.md').toString()
     .split('\n').splice(3).join('\n');
-  var banner = [
+  var str = [
     '/**!',
     ' * <%= pkg.title %> v<%= pkg.version %>',
     ' * <%= pkg.homepage %>',
@@ -50,7 +52,7 @@ function banner() {
     ' */',
     ''].join('\n');
 
-  return header(banner, {pkg: pkg, today: today, license: license});
+  return header(str, {pkg: pkg, today: today, license: license});
 }
 
 gulp.task('build', function() {
@@ -65,4 +67,20 @@ gulp.task('build', function() {
     .pipe(prod())
     .pipe(banner())
     .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('pack', ['build'], function() {
+  gulp.src('dist/*.js')
+    .pipe(zip(pkg.name + '-v' + pkg.version + '.zip'))
+    .pipe(gulp.dest('build/'));
+});
+
+gulp.task('test', function() {
+  gulp.src('*.json')
+    .pipe(jsonlint())
+    .pipe(jsonlint.reporter());
+
+  gulp.src(['gulpfile.js', 'src/**/*.js', 'test/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
