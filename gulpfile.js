@@ -60,7 +60,7 @@ function banner() {
 }
 
 gulp.task('build', function() {
-  return gulp.src('src/*.js')
+  gulp.src('src/*.js')
     .pipe(include())
     // Dev file
     .pipe(dev())
@@ -73,7 +73,7 @@ gulp.task('build', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('pack', ['test', 'build'], function(done) {
+gulp.task('pack', ['test', 'build'], function() {
   gulp.src('dist/*.js')
     .pipe(zip(pkg.name + '-v' + pkg.version + '.zip'))
     .pipe(gulp.dest('build/'));
@@ -81,11 +81,9 @@ gulp.task('pack', ['test', 'build'], function(done) {
   gulp.src('*.json')
     .pipe(bump({version: pkg.version}))
     .pipe(gulp.dest('./'));
-
-  done();
 });
 
-gulp.task('lint', function(done) {
+gulp.task('lint', function() {
   gulp.src('*.json')
     .pipe(jsonlint())
     .pipe(jsonlint.reporter());
@@ -93,8 +91,6 @@ gulp.task('lint', function(done) {
   gulp.src(['gulpfile.js', 'src/**/*.js', 'test/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
-
-  done();
 });
 
 gulp.task('test', ['lint'], function(done) {
