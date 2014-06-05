@@ -1,8 +1,9 @@
 var gulp = require('gulp'),
-    jshint = require('gulp-jshint'),
-    jsonlint = require('gulp-jsonlint'),
     header = require('gulp-header'),
     include = require('gulp-include'),
+    jshint = require('gulp-jshint'),
+    jsonlint = require('gulp-jsonlint'),
+    karma = require('karma'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     zip = require('gulp-zip');
@@ -71,13 +72,13 @@ gulp.task('build', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('pack', ['build'], function() {
+gulp.task('pack', ['test', 'build'], function() {
   gulp.src('dist/*.js')
     .pipe(zip(pkg.name + '-v' + pkg.version + '.zip'))
     .pipe(gulp.dest('build/'));
 });
 
-gulp.task('test', function() {
+gulp.task('lint', function() {
   gulp.src('*.json')
     .pipe(jsonlint())
     .pipe(jsonlint.reporter());
@@ -85,4 +86,25 @@ gulp.task('test', function() {
   gulp.src(['gulpfile.js', 'src/**/*.js', 'test/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+gulp.task('test', ['lint'], function() {
+  // Start karma
+  karma.server.start({
+    configFile: __dirname + '/karma.conf.js'
+  }, function (exitCode) {
+    process.exit(exitCode);
+  });
+});
+
+gulp.task('default', function() {
+  gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint']);
+  // Start karma with watch options
+  karma.server.start({
+    configFile: __dirname + '/karma.conf.js',
+    autoWatch: true,
+    singleRun: false
+  }, function (exitCode) {
+    process.exit(exitCode);
+  });
 });

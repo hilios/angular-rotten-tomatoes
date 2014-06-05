@@ -11,6 +11,7 @@
     "gulp-include": "~0.2",
     "gulp-jshint": "~1.6",
     "gulp-jsonlint": "~0.0",
+    "gulp-karma": "~0.0",
     "gulp-rename": "~1.2",
     "gulp-uglify": "~0.3",
     "gulp-zip": "~0.3",
@@ -21,7 +22,7 @@
     "karma-phantomjs-launcher": "~0.1"
   },
   "scripts": {
-    "start": "./node_modules/karma/bin/karma start",
-    "test": "./node_modules/karma/bin/karma start --ci"
+    "start": "gulp default",
+    "test": "gulp test"
   }
 }
