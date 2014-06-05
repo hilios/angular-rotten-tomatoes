@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     include = require('gulp-include'),
     jshint = require('gulp-jshint'),
     jsonlint = require('gulp-jsonlint'),
-    karma = require('karma'),
+    karma = require('karma').server,
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     zip = require('gulp-zip');
@@ -90,7 +90,7 @@ gulp.task('lint', function() {
 
 gulp.task('test', ['lint'], function() {
   // Start karma
-  karma.server.start({
+  karma.start({
     configFile: __dirname + '/karma.conf.js'
   }, function (exitCode) {
     process.exit(exitCode);
@@ -100,7 +100,7 @@ gulp.task('test', ['lint'], function() {
 gulp.task('default', function() {
   gulp.watch(['src/**/*.js', 'test/**/*.js'], ['lint']);
   // Start karma with watch options
-  karma.server.start({
+  karma.start({
     configFile: __dirname + '/karma.conf.js',
     autoWatch: true,
     singleRun: false
