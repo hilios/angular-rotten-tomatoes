@@ -1,0 +1,39 @@
+h1,h2,h3,h4,h5,h6 {
+  font-weight: normal;
+}
+body {
+  font-family: 'Source Sans Pro', 'Arial', sans-serif;
+  color: #444;
+}
+.brand {
+  background: rgba(223, 26, 34, 0.2);
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.container {
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 1em;
+}
+.jumbotron {
+  background-color: #EFEFEF;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  text-align: center;
+  padding: 1.5em 0;
+  position: relative;
+}
+.jumbotron h1 {
+  /*line-height: 2em;*/
+}
+.jumbotron .pure-button {
+  margin-left: 10px;
+}
+.pure-button {
+  background-color: #DF1A22;
+  color: white;
+}

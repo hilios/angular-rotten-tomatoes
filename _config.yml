@@ -1,0 +1,14 @@
+name:         ngRottenTomatoes
+curr_version: v0.0.1
+baseurl:      http://hilios.github.io/angular-rotten-tomatoes
+highlight:    true
+markdown:     redcarpet
+redcarpet:
+  extensions:
+    - no_intra_emphasis
+    - fenced_code_blocks
+    - autolink
+    - strikethrough
+    - superscript
+exclude:
+  - node_modules/
